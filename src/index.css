@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    @apply bg-white text-gray-900;
+    @apply transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-dark-950 text-gray-100;
+  }
+
+  ::selection {
+    @apply bg-accent-violet/30 text-white;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-accent-violet/60 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent-violet;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-6xl mx-auto px-6 md:px-10;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent-violet via-purple-400 to-accent-cyan bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #7c3aed, #06b6d4);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .glass-card {
+    @apply rounded-2xl border;
+    @apply dark:bg-dark-800/60 dark:border-white/5 dark:backdrop-blur-md;
+    @apply bg-white/80 border-gray-200/80 backdrop-blur-md;
+    @apply shadow-card;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm;
+    @apply bg-gradient-to-r from-accent-violet to-purple-500;
+    @apply text-white shadow-glow;
+    @apply hover:shadow-lg hover:scale-105 transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm;
+    @apply border border-accent-violet/40 text-accent-violet-light;
+    @apply dark:bg-accent-violet/10 bg-accent-violet/5;
+    @apply hover:bg-accent-violet/20 hover:border-accent-violet/60 transition-all duration-200;
+  }
+
+  .skill-badge {
+    @apply px-3 py-1.5 rounded-lg text-xs font-mono font-medium;
+    @apply dark:bg-dark-700 dark:text-accent-cyan-light dark:border dark:border-accent-cyan/20;
+    @apply bg-cyan-50 text-cyan-700 border border-cyan-200;
+  }
+
+  .tag {
+    @apply px-2.5 py-1 rounded-md text-xs font-mono font-medium;
+    @apply dark:bg-dark-700 dark:text-purple-300 dark:border dark:border-purple-500/20;
+    @apply bg-purple-50 text-purple-700 border border-purple-200;
+  }
+
+  .nav-link {
+    @apply relative text-sm font-medium transition-colors duration-200;
+    @apply dark:text-gray-400 dark:hover:text-white;
+    @apply text-gray-600 hover:text-gray-900;
+  }
+  .nav-link.active {
+    @apply dark:text-white text-gray-900;
+  }
+  .nav-link::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-0 h-0.5 rounded-full;
+    @apply bg-gradient-to-r from-accent-violet to-accent-cyan;
+    @apply transition-all duration-300;
+  }
+  .nav-link.active::after,
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(rgba(124, 58, 237, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124, 58, 237, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
