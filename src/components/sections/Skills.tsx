@@ -1,18 +1,18 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiMonitor, FiSmartphone, FiDatabase, FiTool } from 'react-icons/fi'
+import { FiMonitor, FiSmartphone, FiDatabase, FiCode } from 'react-icons/fi'
 import SectionTitle from '../ui/SectionTitle'
 import { skillCategories } from '../../data'
 
 const categoryIcons: Record<string, React.ElementType> = {
-  frontend: FiMonitor,
-  mobile: FiSmartphone,
+  languages: FiCode,
   backend: FiDatabase,
-  tools: FiTool,
+  frontend: FiSmartphone,
+  data: FiMonitor,
 }
 
 export default function Skills() {
-  const [activeCategory, setActiveCategory] = useState('frontend')
+  const [activeCategory, setActiveCategory] = useState('languages')
 
   const active = skillCategories.find((c) => c.category === activeCategory) ?? skillCategories[0]
 
@@ -22,7 +22,7 @@ export default function Skills() {
         <SectionTitle
           eyebrow="Skills"
           title="My technical toolkit"
-          subtitle="Technologies and tools I've worked with and continue to explore."
+          subtitle="Languages, frameworks, databases, and tools I use to build production-grade software."
         />
 
         <div className="max-w-4xl mx-auto">
@@ -35,7 +35,7 @@ export default function Skills() {
             className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10"
           >
             {skillCategories.map((cat) => {
-              const Icon = categoryIcons[cat.category] ?? FiTool
+              const Icon = categoryIcons[cat.category] ?? FiCode
               const isActive = cat.category === activeCategory
               return (
                 <button
@@ -47,7 +47,7 @@ export default function Skills() {
                       : 'dark:bg-dark-800 dark:border-white/5 dark:text-gray-500 dark:hover:border-white/20 dark:hover:text-gray-300 bg-white border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700'
                   }`}
                 >
-                  <Icon className={`w-5 h-5 ${isActive ? '' : ''}`} />
+                  <Icon className="w-5 h-5" />
                   <span className="text-xs font-semibold">{cat.label}</span>
                 </button>
               )
@@ -64,7 +64,7 @@ export default function Skills() {
           >
             <div className="flex items-center gap-3 mb-8">
               {(() => {
-                const Icon = categoryIcons[active.category] ?? FiTool
+                const Icon = categoryIcons[active.category] ?? FiCode
                 return (
                   <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${active.color} flex items-center justify-center`}>
                     <Icon className="w-5 h-5 text-white" />
@@ -88,7 +88,7 @@ export default function Skills() {
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${skill.level}%` }}
-                      transition={{ duration: 0.8, delay: i * 0.07, ease: 'easeOut' }}
+                      transition={{ duration: 0.9, delay: i * 0.07, ease: 'easeOut' }}
                       className={`h-full rounded-full bg-gradient-to-r ${active.color}`}
                     />
                   </div>
@@ -97,30 +97,28 @@ export default function Skills() {
             </div>
           </motion.div>
 
-          {/* All skills quick view */}
+          {/* Core competencies callout */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-10"
+            className="mt-8 grid sm:grid-cols-2 gap-4"
           >
-            <p className="text-xs font-mono font-semibold dark:text-gray-500 text-gray-400 tracking-widest uppercase mb-4 text-center">
-              All Technologies
-            </p>
-            <div className="flex flex-wrap gap-2 justify-center">
-              {skillCategories.flatMap((cat) =>
-                cat.skills.map((skill) => (
-                  <motion.span
-                    key={`${cat.category}-${skill.name}`}
-                    whileHover={{ scale: 1.05 }}
-                    className="skill-badge cursor-default"
-                  >
-                    {skill.name}
-                  </motion.span>
-                )),
-              )}
-            </div>
+            {[
+              { label: 'Problem Solving & Analytical Thinking', icon: '🧠' },
+              { label: 'System Design & Scalability', icon: '🏗️' },
+              { label: 'Cross-Team Collaboration & Leadership', icon: '🤝' },
+              { label: 'Ownership & Delivery Focus', icon: '🎯' },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="flex items-center gap-3 p-4 rounded-xl dark:bg-dark-800 bg-white border dark:border-white/5 border-gray-200"
+              >
+                <span className="text-2xl">{item.icon}</span>
+                <span className="text-sm font-medium dark:text-gray-300 text-gray-700">{item.label}</span>
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>

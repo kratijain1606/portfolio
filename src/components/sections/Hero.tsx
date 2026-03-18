@@ -144,7 +144,7 @@ export default function Hero() {
           {/* Bio */}
           <motion.p
             variants={item}
-            className="text-base md:text-lg dark:text-gray-400 text-gray-600 max-w-xl leading-relaxed mb-8"
+            className="text-base md:text-lg dark:text-gray-400 text-gray-600 max-w-2xl leading-relaxed mb-8"
           >
             {personalInfo.bioShort}
           </motion.p>
